@@ -8,6 +8,10 @@
         return mysqli_real_escape_string($conn, $input);
     } 
 
+    /* ----------------------------------*/
+    /* CATEGORIES FUNCTIONS */
+    /* ----------------------------------*/
+
     function addCategory() {
         if(isset($_POST['submit'])){
 
@@ -81,6 +85,10 @@
         }
         
     }
+
+    /* ----------------------------------*/
+    /* POSTS FUNCTIONS */
+    /* ----------------------------------*/
 
     
 
