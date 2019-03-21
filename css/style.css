@@ -1,0 +1,197 @@
+/* ----------------------------------*/
+/* GENERAL */
+/* ----------------------------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-size: 16px;
+    font-family: 'Lato','Arial',sans-serif;
+    font-weight: 400;
+    color: #444;
+    overflow-x: hidden;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+/* ------------- HEADINGS ------------- */
+h2 {
+    color: #222;
+    font-size: 2.9rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+/* ------------- IMAGES ------------- */
+.img-full {
+    width: 100%;
+}
+
+
+/* ----------------------------------*/
+/* NAVIGATION BAR */
+/* ----------------------------------*/
+.navbar {
+    padding: 1rem 3rem;
+    background-color: #002c49;
+}
+#collapsibleNavbar {
+    font-size: 2rem;
+}
+#search-input {
+    height: 100%;
+}
+#search-input,
+#navbar-btn {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    font-size: 1.6rem;
+    padding: .6rem 1.2rem;
+}
+#navbar-btn i {
+    color: #fff;
+    font-size: 1.5rem;
+}
+.nav-link:link,
+.nav-link:visited,
+.nav-link:hover,
+.navbar-brand:link,
+.navbar-brand:visited,
+.navbar-brand:hover {
+    color: #fff;
+    transition: all .3s ease;
+    text-transform: capitalize;
+}
+.navbar-brand:hover,
+.nav-link:hover {
+    color: #f4c613;
+}
+.form-inline {
+    margin-right: 1rem;
+}
+
+/* ----------------------------------*/
+/* BLOG CONTENT */
+/* ----------------------------------*/
+
+#blog-content {
+    margin: 10rem 3rem 0 3rem; 
+}
+#latest-posts {
+    background-color: rgb(245, 245, 245);
+    padding: 2rem 3rem;
+    box-shadow: 0 0 .5rem rgba(0, 0, 0, .2);
+}
+#posts {
+    padding : 0 3rem 2rem 3rem;
+}
+
+/* ----------------------------------*/
+/* POSTS */
+/* ----------------------------------*/
+.post-title {
+    color: #222;
+    font-size: 2.2rem;
+}
+/* ------------- VERTICAL POSTS ------------- */
+.post-vertical {
+    margin-bottom: 3rem;
+}
+.post-vertical img{
+    margin-bottom: 1rem;
+}
+.post-vertical .post-date {
+    margin: 1rem 0;
+}
+
+/* ------------- HORIZONTAL POSTS ------------- */
+.post-horizontal {
+    margin-bottom: 1.5rem;
+}
+.most-popula .post-horizontal img{
+    height: 100%;
+}
+
+.most-popular .post-horizontal .post-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+.most-popular .post-horizontal .post-date{
+    font-size: 1.3rem;
+}
+.most-popular .post-horizontal .post-desc{
+    font-size: 1.3rem;
+}
+
+/* ----------------------------------*/
+/* CATEGORIES */
+/* ----------------------------------*/
+.categories ul {
+    list-style: none;
+}
+
+.categories ul li a{
+    display: block;
+    margin: 1rem 0;
+}
+
+/* ----------------------------------*/
+/* CATEGORIES */
+/* ----------------------------------*/
+
+footer {
+    background-color: #212226;
+    padding: 2.5rem 0;
+    color: #fff;
+}
+footer p {
+    display: inline-block;
+    margin: 0 auto;
+}
+footer p span {
+    display: inline-block;
+    margin-left: .2rem;
+    letter-spacing: .15rem;
+    font-weight: 700;
+}
+
+/* ----------------------------------*/
+/* CATEGORIES */
+/* ----------------------------------*/
+
+.pagination {
+    font-size: 2rem;
+    margin: 2rem auto;
+}
+
+.pagination .page-link {
+    padding: 1.5rem;
+}
+
+
+/* ----------------------------------*/
+/* LOGIN REFISTRATION MODAL */
+/* ----------------------------------*/
+.modal-body .nav-link:link, 
+.modal-body .nav-link:visited, 
+.modal-body .nav-link:hover, 
+.modal-body .navbar-brand:link, 
+.modal-body .navbar-brand:visited, 
+.modal-body .navbar-brand:hover {
+    color: #212226;
+}
+.modal-body .nav-item {
+    width: 50%;
+    text-align: center;
+}
+
+.modal-body .nav-item .active {
+    background: #444;
+    color: #fff;
+}
+
