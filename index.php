@@ -5,10 +5,10 @@
     if(isset($_POST['submit']) && !empty($_POST['search'])) {
         $search = $_POST['search'];
         
-        $query = "SELECT * FROM posts WHERE tags LIKE '%$search%'";
+        $query = "SELECT * FROM posts WHERE tags LIKE '%$search%' OR title LIKE '%$search%'";
 
     }else {
-        $query = "SELECT * FROM posts";
+        $query = "SELECT * FROM posts ORDER BY post_date DESC";
     }
     
     $result = mysqli_query($conn,$query);
@@ -112,12 +112,12 @@
                         ?>
                         <?php foreach($posts as $post): ?>
                             <div class="post-vertical">
-                                <h3 class="post-title"><a href=""><?php echo $post['title'] ?></a></h3>
+                                <h3 class="post-title"><a href="post.php?id=<?php echo $post['id'] ?>"><?php echo $post['title'] ?></a></h3>
                                 <h4>by <a href="" class="username">user</a></h4>
-                                <img src="images/proxy.duckduckgo.com.jpeg" alt="post image" id="post-img" class="img-full"
+                                <img src="images/<?php echo $post['image'] ?>" alt="post image" id="post-img" class="img-full"
                                     style="border-radius:2px">
                                 <div class="post-date">
-                                    <i class="fa fa-calendar"></i> <span id="date"><?php echo $post['post_date']; ?></span>
+                                    <i class="fa fa-calendar"></i> <span id="date"><?php echo substr($post['post_date'],0,-3); ?></span>
                                 </div>
                                 <p class="post-desc"><?php echo $post['content'] ?></p>
                                 <div class="btn btn-primary">Read More ></div>

@@ -34,6 +34,8 @@
         <td style="width: 20%;"><img src="../images/<?php echo $image; ?>" alt="image" style="width: 100%;"></td>
         <td><?php echo $comments; ?></td>
         <td><?php echo $status; ?></td>
+        <td><a href="posts.php?source=edit_posts&id=<?php echo $id; ?>" class="btn btn-primary">Edit</a></td>
+        <td><a href="posts.php?source=delete_posts&id=<?php echo $id; ?>" class="btn btn-danger">Delete</a></td>
     </tr>
     <?php } ?>
     </tbody>

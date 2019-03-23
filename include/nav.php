@@ -1,4 +1,7 @@
 <?php 
+    
+    ob_start();
+
     $query = "SELECT ctg_title FROM categories ORDER BY ctg_id LIMIT 3";
 
     $result = mysqli_query($conn,$query);
@@ -10,7 +13,7 @@
 ?>
 <header>
     <nav class="navbar navbar-expand-md fixed-top">
-        <a class="navbar-brand" href="#home">
+        <a class="navbar-brand" href="index.php">
             <h1 style="font-size:32px">PHPBlog</h1>
         </a>
 
@@ -38,18 +41,6 @@
             </form>
 
             <ul class="navbar-nav my-2 my-lg-0">
-                <!-- Button to Open the Modal 
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#myModal" type="button" href="">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#myModal" type="button" href="">Register</a>
-                </li>
-
-                <button type="button" class="nav-link btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                    Login
-                </button>
-                -->
                 <li class="nav-item">
                     <a type="button" class="nav-link" data-toggle="modal" data-target="#myModal" href="#profile" role="tab" id="login">Login</a>
                 </li>

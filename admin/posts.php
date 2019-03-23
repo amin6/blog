@@ -1,7 +1,8 @@
-<?php 
-
-    include 'functions.php';
+<?php
+    
     include 'include/admin_header.php';
+    include 'functions.php';
+    include 'include/db.php';
 
 ?>
 
@@ -25,9 +26,15 @@
                         if(isset($_GET['source'])){
                             if($_GET['source'] === 'add_posts'){
                                 include 'include/add_posts.php';
-                            }else {
+                            } elseif($_GET['source'] === 'edit_posts') {
+                                include 'include/edit_post.php';
+                            } elseif($_GET['source'] === 'delete_posts') {
+                                include 'include/delete_post.php';
+                            } else {
                                 include 'include/all_posts.php';
                             }
+                        }else {
+                            include 'include/all_posts.php';
                         }
                     ?>
                         

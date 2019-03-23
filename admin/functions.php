@@ -8,6 +8,11 @@
         return mysqli_real_escape_string($conn, $input);
     } 
 
+    function redirect($location){
+        header("Location:" . $location);
+        exit;
+    }
+
     /* ----------------------------------*/
     /* CATEGORIES FUNCTIONS */
     /* ----------------------------------*/
@@ -59,7 +64,7 @@
             $query = "DELETE FROM categories WHERE ctg_id='$id';";
             $result = mysqli_query($conn,$query);
 
-            header("Location: categories.php");
+            redirect("categories.php");
 
         }
         
@@ -85,10 +90,3 @@
         }
         
     }
-
-    /* ----------------------------------*/
-    /* POSTS FUNCTIONS */
-    /* ----------------------------------*/
-
-    
-

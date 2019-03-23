@@ -1,14 +1,11 @@
 <?php 
 
-
     if(isset($_POST['submit'])) {
         $title = mysqli_real_escape_string($conn,$_POST['title']);
         $tags = mysqli_real_escape_string($conn,$_POST['tags']);
         
         $post_image = $_FILES['image']['name'];
         $post_image_tmp = $_FILES['image']['tmp_name'];
-
-
 
         $content = mysqli_real_escape_string($conn,$_POST['content']);
         

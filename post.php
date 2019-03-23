@@ -1,4 +1,35 @@
-<?php include('include/header.php');?>
+<?php 
+
+  include('include/header.php');
+
+  
+
+  if(isset($_GET['id'])) {
+    $id = mysqli_real_escape_string($conn,$_GET['id']);
+
+    $query = "SELECT * FROM posts WHERE id='$id'";
+    $result = mysqli_query($conn,$query);
+
+    $post = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+    if(!empty($post)){
+      $title = $post[0]['title'];
+      $tags = $post[0]['tags'];
+      $date = substr($post[0]['post_date'],0,-3);
+      $post_image = $post[0]['image'];
+      $content = $post[0]['content'];
+
+      $query = "SELECT * FROM comments WHERE post_id='$id'";
+      $result = mysqli_query($conn,$query);
+
+      $comments = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+      
+      if(isset($_POST['comment_submit'])) {
+        include 'include/add_comment.php';
+      }
+?>
+    
 
   <!-- Page Content -->
   <div class="container">
@@ -6,46 +37,31 @@
     <div class="row">
 
       <!-- Post Content Column -->
-      <div class="col-lg-8" >
+      <div class="col-lg-8" style="margin-top: 8rem;">
 
         <!-- Title -->
-        <h1 class="mt-4">Post Title</h1>
+        <h1 class="mt-4" style="color:#007bff;font-size:3rem;"><?php echo $title; ?></h1>
 
         <!-- Author -->
         <p class="lead">
           by
-          <a href="#">Start Bootstrap</a>
+          <a href="#">User</a>
         </p>
 
         <hr>
 
         <!-- Date/Time -->
-        <p>Posted on January 1, 2019 at 12:00 PM</p>
+        <p>Posted on January <?php echo $date; ?></p>
 
         <hr>
 
         <!-- Preview Image -->
-        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+        <img class="img-fluid rounded" src="images/<?php echo $post_image; ?>" alt="">
 
         <hr>
 
         <!-- Post Content -->
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-
-        <blockquote class="blockquote">
-          <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-          <footer class="blockquote-footer">Someone famous in
-            <cite title="Source Title">Source Title</cite>
-          </footer>
-        </blockquote>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
+        <p class="lead" style="font-size:2rem;"><?php echo $content; ?></p>
 
         <hr>
 
@@ -53,54 +69,46 @@
         <div class="card my-4">
           <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
-            <form>
+            <form action="post.php?id=<?php echo $id; ?>" method="post">  
               <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+                <label for="">name</label>
+                <input class="form-control" type="text" name="name">
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <div class="form-group">
+                <label for="">email</label>
+                <input class="form-control" type="teemailxt" name="email">
+              </div>
+              <textarea name="content" id="" class="form-control" rows="10" style="margin-top:1.5rem"></textarea>
+              <button type="submit" name="comment_submit" class="btn btn-primary">Submit</button>
             </form>
           </div>
         </div>
 
-        <!-- Single Comment -->
-        <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-          <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-          </div>
-        </div>
-
-        <!-- Comment with nested comments -->
-        <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-          <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-            <div class="media mt-4">
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+        <!-- Comments -->
+            <?php 
+              if(!empty($comments)) {
+                foreach($comments as $comment) { 
+            ?>
+              <div class="media mt-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                  <h5 class="mt-0"><?php echo $comment['author']; ?></h5>
+                  <?php echo $comment['content']; ?>
+                </div>
               </div>
-            </div>
-
-            <div class="media mt-4">
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-              </div>
-            </div>
+            <?php 
+                }
+              } else {
+                echo "<h3 class='alert'>there is not comments for this post</h3>";
+              } 
+            ?>
 
           </div>
+          <!-- Sidebar Widgets Column -->
+          <?php include 'include/sidebar.php' ?>
         </div>
 
       </div>
-
-      <!-- Sidebar Widgets Column -->
-      <?php include 'include/sidebar.php' ?>
 
       </div>
 
@@ -112,3 +120,9 @@
 
   <!-- Footer -->
   <?php include 'include/footer.php'; ?>
+
+<?php
+  }
+}
+
+?>

@@ -1,4 +1,4 @@
-<footer id="footer-sec">
+<footer id="footer-sec" style="margin-top:5rem;">
         <div class="container">
             <div class="row">
                 <p>Copyright © 2019 All Rights Reserved By <span>PHPBlog</span> </p>
