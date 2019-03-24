@@ -163,7 +163,16 @@
                         <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
+                            Users <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="users.php?source=all_users">Show users</a>
+                            </li>
+                            <li>
+                                <a href="users.php?source=add_users">Add users</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="categories.php"><i class="fa fa-fw fa-desktop"></i> Categories</a>
@@ -172,9 +181,9 @@
                         <a href="comments.php"><i class="fa fa-fw fa-wrench"></i> Comments</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-arrows-v"></i>
                             Posts <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
+                        <ul id="demo1" class="collapse">
                             <li>
                                 <a href="posts.php?source=all_posts">Show Posts</a>
                             </li>
