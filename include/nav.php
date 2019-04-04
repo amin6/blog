@@ -1,6 +1,31 @@
 <?php 
     
-    ob_start();
+    session_start();
+
+    if(isset($_POST['submit'])) {
+        $_SESSION['email'] = mysqli_real_escape_string($conn,$_POST['email']);
+        $_SESSION['password'] = mysqli_real_escape_string($conn,$_POST['password']);
+
+        header("Location: admin/index.php");
+    }elseif(isset($_POST['register'])) {
+        $query = "SELECT randsalt FROM users";
+        $result = mysqli_query($conn,$query);
+
+        $salt = mysqli_fetch_all($result,MYSQLI_ASSOC);
+        $salt = $salt[0]['randsalt'];
+        if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password'])){
+
+            $username = mysqli_real_escape_string($conn,$_POST['username']);
+            $email = mysqli_real_escape_string($conn,$_POST['email']);
+            $password = mysqli_real_escape_string($conn,$_POST['password']);
+
+            $password = crypt($password,$salt);
+
+            $query = "INSERT INTO users(username,email,u_password) VALUES('$username','$email','$password')";
+            $result = mysqli_query($conn,$query);
+
+        }
+    }   
 
     $query = "SELECT ctg_title FROM categories ORDER BY ctg_id LIMIT 3";
 
@@ -31,6 +56,14 @@
             <?php
                 }
             ?>
+            <li class="nav-item">
+                <a class="nav-link" href="admin/index.php">admin</a>
+            </li>
+            <?php if(isset($_GET['id'])) { ?>
+            <li class="nav-item">
+                <a class="nav-link" href="admin/posts.php?source=edit_posts&id=<?php echo mysqli_real_escape_string($conn,$_GET['id']); ?>">Edit Post</a>
+            </li>
+            <?php } ?>
             </ul>
 
             <form class="form-inline my-2 my-lg-0" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
@@ -96,7 +129,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div>
-                                        <button type="submit" class="btn btn-success btn-lg">Login</button>
+                                        <button type="submit" name="submit" class="btn btn-success btn-lg">Login</button>
                                         <a class="btn btn-link btn-lg" href="">Forgot Your Password?</a>
                                     </div>
                                 </div>
@@ -108,7 +141,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Username</label>
                                     <div>
-                                        <input type="text" class="form-control input-lg" name="name" value="">
+                                        <input type="text" class="form-control input-lg" name="username" value="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -124,14 +157,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Confirm Password</label>
                                     <div>
-                                        <input type="password" class="form-control input-lg" name="password_confirmation">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div>
-                                        <button type="submit" class="btn btn-success btn-lg">
+                                        <button type="submit" name="register" class="btn btn-success btn-lg">
                                             Register
                                         </button>
                                     </div>
@@ -139,82 +166,6 @@
                             </form>
                         </div>
                     </div>
-                <!--
-               Tab panes 
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active show" id="login">
-                        <form role="form" method="POST" action="">
-                            <input type="hidden" name="_token" value="">
-                            <div class="form-group">
-                                <label class="control-label">E-Mail Address</label>
-                                <div>
-                                    <input type="email" class="form-control input-lg" name="email" value="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Password</label>
-                                <div>
-                                    <input type="password" class="form-control input-lg" name="password">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember"> Remember Me
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div>
-                                    <button type="submit" class="btn btn-success">Login</button>
-        
-                                    <a class="btn btn-link" href="">Forgot Your Password?</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                
-                    <div role="tabpanel" class="tab-pane fade" id="register">
-                        <form role="form" method="POST" action="">
-                            <input type="hidden" name="_token" value="">
-                            <div class="form-group">
-                                <label class="control-label">Username</label>
-                                <div>
-                                    <input type="text" class="form-control input-lg" name="name" value="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">E-Mail Address</label>
-                                <div>
-                                    <input type="email" class="form-control input-lg" name="email" value="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Password</label>
-                                <div>
-                                    <input type="password" class="form-control input-lg" name="password">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Confirm Password</label>
-                                <div>
-                                    <input type="password" class="form-control input-lg" name="password_confirmation">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div>
-                                    <button type="submit" class="btn btn-success">
-                                        Register
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            -->
                 
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

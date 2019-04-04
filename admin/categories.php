@@ -16,8 +16,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Welcome
-                            <small>Writer</small>
+                            Categories
                         </h1>
                     </div>
                 </div>

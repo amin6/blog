@@ -14,8 +14,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Welcome
-                            <small>Writer</small>
+                            Users
                         </h1>
                     </div>
                 </div>
@@ -41,4 +40,5 @@
                 </div>
 
             </div>
+            <script src="js/script.js"></script>
 <?php  include 'include/admin_footer.php'; ?>

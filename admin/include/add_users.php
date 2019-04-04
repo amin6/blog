@@ -16,6 +16,8 @@
             move_uploaded_file($user_image_tmp,"../images/$user_image");
             $query = "INSERT INTO users(username,email,u_password,u_image,role) VALUES ('$username','$email','$password','$user_image','$role')";
             $result = mysqli_query($conn,$query);
+
+            echo '<h3 class="alert alert-success">User successfully Added</h3>';
         }
     }
 ?>

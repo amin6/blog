@@ -24,7 +24,7 @@
 
                 $password = mysqli_real_escape_string($conn,$_POST['password']);
  
-                move_uploaded_file($post_tmp_image, "../images/$user_image");
+                move_uploaded_file($user_image_tmp, "../images/$user_image");
                 
                 if(empty($user_image)) {
                     $user_image = $users[0]['u_image'];
@@ -32,6 +32,8 @@
 
                 $query = "UPDATE users SET username='$username', email='$email', u_image='$user_image', u_password='$password', role='$role' WHERE id=$id ";
                 $result = mysqli_query($conn,$query);
+
+                echo '<h3 class="alert alert-success">User successfully Edited</h3>';
             }
             
 ?>
@@ -69,8 +71,6 @@
 
 
 <?php
-        } else {
-            echo '<h1 class="alert alert-danger">This Post Does Not Exist</h1>';
         }
     }
 ?>

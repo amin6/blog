@@ -14,8 +14,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Welcome
-                            <small>Writer</small>
+                            Posts
                         </h1>
                     </div>
                 </div>
@@ -41,4 +40,14 @@
                 </div>
 
             </div>
+        <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+        <script>ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .then( editor => {
+            console.log( 'Editor was initialized', editor );
+        } )
+        .catch( err => {
+            console.error( err.stack );
+        } );</script>
+        
 <?php  include 'include/admin_footer.php'; ?>

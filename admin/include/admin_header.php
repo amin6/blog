@@ -1,3 +1,32 @@
+<?php 
+    include 'include/db.php';
+    session_start();
+
+    if(isset($_SESSION['email']) && isset($_SESSION['password'])) {
+        $email = $_SESSION['email'];
+        $password = $_SESSION['password']; 
+        $query = "SELECT * FROM users WHERE email = '$email'";
+        $result = mysqli_query($conn,$query);
+
+        $users = mysqli_fetch_all($result,MYSQLI_ASSOC);
+        $db_password = $users[0]['u_password'];
+
+        $password = crypt($password, $db_password);
+
+        if(empty($users) || $password !== $db_password) {
+            header("Location: ../index.php");
+        } else {
+            $role = $users[0]['role'];
+
+            if($role !== 'admin') {
+                header("Location: ../index.php");
+            }
+        }
+    }else {
+        header("Location: ../index.php");
+    }
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +48,8 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,7 +74,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Admin</a>
+                <a class="navbar-brand" href="index.php">Admin</a>
+                <a class="navbar-brand" href="../index.php">Home</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -58,7 +90,7 @@
                                     </span>
                                     <div class="media-body">
                                         <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                            <strong><?php echo $users[0]['username']; ?></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -74,7 +106,7 @@
                                     </span>
                                     <div class="media-body">
                                         <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                            <strong><?php echo $users[0]['username']; ?></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -90,7 +122,7 @@
                                     </span>
                                     <div class="media-body">
                                         <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                            <strong><?php echo $users[0]['username']; ?></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -131,7 +163,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><?php echo $users[0]['username']; ?> <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -145,7 +177,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="include/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -154,13 +186,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-                    </li>
-                    <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
+                        <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
@@ -193,8 +219,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                        <a href="profile.php"><i class="fa fa-fw fa-table"></i> Profile</a>
                     </li>
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

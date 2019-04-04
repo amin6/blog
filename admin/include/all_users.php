@@ -1,6 +1,31 @@
+<?php 
+    if(isset($_POST['submit']) && isset($_POST['user_id'])) {
+        $user_id = $_POST['user_id'];
+
+        if($_POST['apply'] === "delete") {
+            foreach($user_id as $id) {
+                $query = "DELETE FROM users WHERE id=$id";
+                $result = mysqli_query($conn,$query);
+            }
+        }
+    }
+?>
+<form action="" method="post">
+    <div class="col-md-5">
+        <div class="form-group">
+            <select name="apply" id="" class="form-control">
+                <option value=""></option>
+                <option value="delete">Delete</option>
+            </select>
+        </div>
+    </div>  
+    <div class="col-md-5">
+        <button class="btn btn-success" type="submit" name="submit">Apply</button>
+    </div>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
+            <th><input type="checkbox" class="form-control checkAll" id=""></th>
             <th>ID</th>
             <th>username</th>
             <th>email</th>
@@ -25,6 +50,7 @@
             $role = $user['role'];
     ?>
     <tr>
+        <td><input type="checkbox" id="" class="form-control checkbox" name="post_id[]" value="<?php echo $id; ?>"></td>
         <td><?php echo $id; ?></td>
         <td><?php echo $username; ?></td>
         <td><?php echo $email; ?></td>
@@ -37,3 +63,4 @@
     <?php } ?>
     </tbody>
 </table>
+</form>

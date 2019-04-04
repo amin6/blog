@@ -1,8 +1,6 @@
 <?php
     
     include 'include/admin_header.php';
-    include 'functions.php';
-    include 'include/db.php';
 
     if(isset($_GET['delete'])) {
         $id = mysqli_real_escape_string($conn,$_GET['delete']);
@@ -20,8 +18,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Welcome
-                            <small>Writer</small>
+                            Comments
                         </h1>
                     </div>
                 </div>
@@ -68,3 +65,7 @@
                         <?php } ?>
                         </tbody>
                     </table>
+
+<?php
+include 'include/admin_footer.php';
+?>

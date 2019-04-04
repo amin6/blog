@@ -114,8 +114,8 @@
                             <div class="post-vertical">
                                 <h3 class="post-title"><a href="post.php?id=<?php echo $post['id'] ?>"><?php echo $post['title'] ?></a></h3>
                                 <h4>by <a href="" class="username">user</a></h4>
-                                <img src="images/<?php echo $post['image'] ?>" alt="post image" id="post-img" class="img-full"
-                                    style="border-radius:2px">
+                                <a href="post.php?id=<?php echo $post['id'] ?>"><img src="images/<?php echo $post['image'] ?>" alt="post image" id="post-img" class="img-full"
+                                    style="border-radius:2px"></a>
                                 <div class="post-date">
                                     <i class="fa fa-calendar"></i> <span id="date"><?php echo substr($post['post_date'],0,-3); ?></span>
                                 </div>
